@@ -1,11 +1,11 @@
 # dl_otto_klaus
-
-# Credenciasles
 ```
+## Credenciales
 usuario: usuario@user.com
 clave: 123456
+```
 
-## Project setup
+### Project setup
 ```
 npm install
 ```
