@@ -1,5 +1,10 @@
 # dl_otto_klaus
 
+# Credenciasles
+```
+usuario: usuario@user.com
+clave: 123456
+
 ## Project setup
 ```
 npm install
