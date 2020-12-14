@@ -1,10 +1,9 @@
 # dl_otto_klaus
-```
+
 ## Credenciales
 ```
 usuario: usuario@user.com
 clave: 123456
-```
 
 ### Project setup
 ```
