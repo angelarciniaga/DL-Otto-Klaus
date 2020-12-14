@@ -1,12 +1,37 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Navbar />
     <router-view/>
   </div>
 </template>
+<script>
+import Navbar from '@/components/Navbar.vue';
+import firebase from 'firebase'
+
+export default {
+  name: 'App',
+  components: {
+    Navbar
+  },
+  data: () =>({
+
+  }),
+  created() {
+    this.$store.dispatch('datos');
+  },
+  mounted() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user){
+        this.$store.dispatch('agregarUser', user)
+        console.log('Sesion Activa');
+      } else {
+        console.log('No hay sesion activa...')
+        this.$store.dispatch('agregarUser', '')
+      }
+    });
+  },
+};
+</script>
 
 <style>
 #app {
