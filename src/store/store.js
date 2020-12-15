@@ -1,12 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {db} from '../main';
+import router from '../router/router';
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    dataJuegos: [],
+    juguetes: [],
     user: {}
   },
   getters:{
@@ -14,50 +15,51 @@ export default new Vuex.Store({
       return state.user;
     },
     enviarJuegos(state){
-      return state.dataJuegos;
+      return state.juguetes;
     }
   },
   mutations: {
     addUsuario(state, userData){
       state.user = userData;
     },
-    mutarjuego(state, arreglo) {
-      state.dataJuegos = arreglo
+    mutarJuego(state, arreglo) {
+      state.juguetes = arreglo;
     }
   },
   actions: {
     traerDatos({commit}){
-      db.collection('jueguetes').onSnapshot(resp => {
+      db.collection('juguetes').onSnapshot(resp =>{
         let arreglo = [];
         resp.forEach(element => {
           arreglo.push({
             id: element.id,
+            codigo: element.data().codigo,
             nombre: element.data().nombre,
             stock: element.data().stock,
             precio: element.data().precio,
-          })
+          });
         });
-        commit('mutarjuego', arreglo);
-        console.log(arreglo);
+        commit('mutarJuego', arreglo);
       })
     },
-    agregarJuego(context, data){
-      db.collection('jueguetes').add({
-        codigo: data.codigo,
-        nombre: data.nombre,
-        stock: data.stock,
-        precio: data.precio
+    listaActual(context, Juguetes){
+      db.collection('juguetes').doc(Juguetes.id).update({
+        nombre: Juguetes.nombre,
+        stock: Juguetes.stock,
+        precio: Juguetes.precio
+      })
+      router.replace('/inventario')
+    },
+    deletJuguete(context,id){
+      db.collection('juguetes').doc(id).delete().then(() =>{
+        console.log('Se elimino');
+      }).catch(error =>{
+        console.log(error);
       })
     },
 
     agregarUser({commit}, user){
       commit('addUsuario', user);
     },
-    datos({commit}){
-      commit('traerDatos')
-    },
-    addJuego({commit},data){
-      commit('agregarJuego', data);
-    }
   },
 })

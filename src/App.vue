@@ -16,9 +16,6 @@ export default {
   data: () =>({
 
   }),
-  created() {
-    this.$store.dispatch('datos');
-  },
   mounted() {
     firebase.auth().onAuthStateChanged((user) => {
       if(user){

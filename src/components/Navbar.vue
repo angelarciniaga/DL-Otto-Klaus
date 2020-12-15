@@ -2,6 +2,10 @@
     <div>
     <b-navbar class="mb-5" type="dark" variant="info">
         <b-navbar-brand><router-link tag="div" :to="{name: 'Home'}">Otto Klaus</router-link></b-navbar-brand>
+        <b-navbar-brand><router-link tag="div" :to="{name: 'Inventario'}">Inventario</router-link></b-navbar-brand>
+        <b-navbar-brand><router-link tag="div" :to="{name: 'Agregar'}">Agregar</router-link></b-navbar-brand>
+        <b-navbar-brand><router-link tag="div" :to="{name: 'Editar'}">Editar</router-link></b-navbar-brand>
+
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
